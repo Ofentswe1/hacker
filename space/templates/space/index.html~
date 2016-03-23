@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="utf-8">
+	
+	<!-- <base href="/"> -->
+
+	<title>FarmHelp</title>
+	{% load staticfiles %}
+	
+	<!-- Icons -->
+	<link rel="stylesheet" href="{% static 'space/fonts/ionicons/css/ionicons.min.css' %}">
+	<link rel="stylesheet" href="{% static 'space/fonts/font-awesome/css/font-awesome.min.css' %}">
+
+	<!-- Plugins -->
+	<link rel="stylesheet" href="{% static 'space/styles/plugins/c3.css' %}">
+	<link rel="stylesheet" href="{% static 'space/styles/plugins/waves.css' %}">
+	<link rel="stylesheet" href="{% static 'space/styles/plugins/perfect-scrollbar.css' %}">
+
+	
+	<!-- Css/Less Stylesheets -->
+	<link rel="stylesheet" href="{% static 'space/styles/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'space/styles/main.min.css' %}">
+
+
+	 
+ 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,300' rel='stylesheet' type='text/css'>
+
+	<!-- Match Media polyfill for IE9 -->
+	<!--[if IE 9]> <script src="scripts/ie/matchMedia.js"></script>  <![endif]--> 
+
+	
+</head>
+<div id="weather"></div>
+<body id="app" class="app off-canvas">
+	
+	<!-- header -->
+	<header class="site-head" id="site-head">
+		<ul class="list-unstyled left-elems">
+			<!-- nav trigger/collapse -->
+			<li>
+				<a href="javascript:;" class="nav-trigger ion ion-drag"></a>
+			</li>
+			<!-- #end nav-trigger -->
+
+			<!-- Search box -->
+		
+			<!-- site-logo for mobile nav -->
+			<li>
+				<div class="site-logo visible-xs">
+					<a href="javascript:;" class="text-uppercase h3">
+						<span class="text">FARMHELP</span>
+					</a>
+				</div>
+			</li> <!-- #end site-logo -->
+
+			<!-- #end notification drop -->
+
+		</ul>
+
+	</header>
+	<!-- #end header -->
+
+	<!-- main-container -->
+	<div class="main-container clearfix">
+		<!-- main-navigation -->
+		<aside class="nav-wrap" id="site-nav" data-perfect-scrollbar>
+			<div class="nav-head">
+				<!-- site logo -->
+				<a href="index.html" class="site-logo text-uppercase">
+					<i class="ion ion-egg"></i>
+					<span class="text">FARMHELP</span>
+				</a>
+			</div>
+
+			<!-- Site nav (vertical) -->
+
+			<nav class="site-nav clearfix" role="navigation">
+
+				<!-- navigation -->
+				<ul class="list-unstyled clearfix nav-list mb15">
+					<li class="active">
+						<a href="index.html">
+							<i class="ion ion-monitor"></i>
+							<span class="text">Dashboard</span>
+						</a>
+					</li>
+					<li>
+						<a href="email.inbox.html">
+							<i class="ion ion-settings"></i>
+							<span class="text">Configurations</span>
+						</a>
+					</li>
+				</ul> <!-- #end navigation -->
+			</nav>
+
+			<!-- nav-foot -->
+			<footer class="nav-foot">
+				<p>2015 &copy; <span>FarmHelp</span></p>
+			</footer>
+
+		</aside>
+		<!-- #end main-navigation -->
+
+		<!-- content-here -->
+		<div class="content-container" id="content">
+			<!-- dashboard page -->
+			<div class="page page-dashboard">
+
+				<div class="page-wrap">
+					<div class="row">
+						<div class="col-md-3 col-sm-6">
+							<div class="panel panel-default mb20 mini-box panel-hovered">
+								<div class="panel-body">
+									<div class="clearfix">
+										<div class="info left">
+											<h4 class="mt0 text-primary text-bold">Medium</h4>
+											<h5 class="text-light mb0">Current Water Usage</h5>
+										</div>
+										<div class="right ion ion-ios-pulse icon"></div>
+									</div>
+								</div>
+								<div class="panel-footer clearfix panel-footer-sm panel-footer-primary">
+							
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-3 col-sm-6">
+							<div class="panel panel-default mb20 mini-box panel-hovered">
+								<div class="panel-body">
+									<div class="clearfix">
+										<div class="info left">
+											<h4 class="mt0 text-success text-bold">78.08</h4>
+											<h5 class="text-light mb0">Humidity</h5>
+										</div>
+										<div class="right ion ion-waterdrop icon"></div>
+									</div>
+								</div>
+								<div class="panel-footer clearfix panel-footer-sm panel-footer-success">
+							
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-3 col-sm-6">
+							<div class="panel panel-default mb20 mini-box panel-hovered">
+								<div class="panel-body">
+									<div class="clearfix">
+										<div class="info left">
+											<h4 class="mt0 text-info text-bold" id="date"></h4>
+											<h5 class="text-light mb0">Date</h5>
+										</div>
+										<div class="right ion ion-clock icon"></div>
+									</div>
+								</div>
+								<div class="panel-footer clearfix panel-footer-sm panel-footer-info">
+								
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-3 col-sm-6">
+							<div class="panel panel-default mb20 mini-box panel-hovered">
+								<div class="panel-body">
+									<div class="clearfix">
+										<div class="info left">
+											<h4 class="mt0 text-pink text-bold" id="temperature"></h4>
+											<h5 class="text-light mb0" id="city"></h5>
+										</div>
+										<div class="right ion ion-ios-cloud-download-outline icon"></div>
+									</div>
+								</div>
+								<div class="panel-footer clearfix panel-footer-sm panel-footer-pink">
+							
+								</div>
+							</div>
+						</div>
+						<!-- #end mini boxes -->
+					</div> <!-- #end row -->
+
+					<!-- row -->
+					<div class="row">
+
+						<!-- Analytics -->
+						<div class="col-md-7">
+							<div class="panel panel-default mb20 panel-hovered analytics">
+								<div class="panel-heading">Analytics</div>
+								<div class="panel-body">
+						
+							<!-- tab style -->
+							<div class="clearfix tabs-fill">
+								<ul class="nav nav-tabs">
+									<li class="active"><a href="#tab-flip-one-1" data-toggle="tab">Image</a></li>
+									<li><a href="#tab-flip-two-1" data-toggle="tab">Map</a></li>
+								</ul>
+								<div class="tab-content">
+									<div class="tab-pane active" id="tab-flip-one-1">
+										<div class="row">
+										<div class="col-xs-8">
+										<div class="clearfix">
+										   <img id="img_spectral" src="{% static 'space/reports/hyper1.jpg' %}">
+										</div>
+										</div>
+										<div class="col-xs-4" align="right">
+										<div class="clearfix">
+										  <img src="{% static 'space/reports/unnamed.jpg' %}">
+										</div>
+										</div>
+										</div>
+										<div class="row">
+										   <div class="col-md-12"><hr/>
+											<button id="btnUpdating" class="btn btn-lg btn-success" type="button">Activate Sprinklers</button>
+										   </div>
+										</div>
+									</div>
+									<div class="tab-pane" id="tab-flip-two-1">
+
+										<form action="" method="POST" enctype="multipart/form-data">
+									<div id="googleMap" value="images" style="height:400px;width:400px;position:relative"></div>
+									<hr/>
+									<button class="btn btn-lg btn-success" type="submit">Capture</button>									</form>
+									</div>
+									
+								</div>
+							</div>
+							<!-- tab style -->
+								</div>
+							</div>
+							
+						</div> <!-- #end analytics -->
+
+						<div class="col-md-5">
+						<!-- recent activities -->
+						<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-default mb20 activities">
+								<div class="panel-heading">Activities</div>
+								<div class="panel-body">
+									<ul class="list-unstyled">
+										<li class="primary">
+											<span class="point"></span>
+											<span class="time small text-muted">2 mins ago</span>
+											<p>New hyperspectral image loaded</p>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<!-- #end recent activities -->
+						
+
+					
+					<div class="col-md-12">
+							<div class="panel panel-default mb20 panel-hovered analytics">
+								<div class="panel-heading">Next 5 days weather Forecast</div>
+								<div class="panel-body">
+					<table class="table table-bordered"> 
+						<thead>
+							<tr><th class="col-g-1">Day</th><th>Forecast</th><th>State</th></tr>
+						</thead>
+						<tbody id="tbody">
+						</tbody>
+					</table>
+					</div>
+					</div>
+					</div>
+					</div>
+
+					</div> <!-- #end row -->
+
+				</div> <!-- #end page-wrap -->
+			</div>
+			<!-- #end dashboard page -->
+		</div>
+		<!-- content-here -->
+
+
+	</div> <!-- #end main-container -->
+
+	<!-- theme settings -->
+	<div class="site-settings clearfix hidden-xs">
+		<div class="settings clearfix">
+			<div class="trigger ion ion-settings left"></div>
+			<div class="wrapper left">
+				<ul class="list-unstyled other-settings">
+					<li class="clearfix mb10">
+						<div class="left small">Nav Horizontal</div>
+						<div class="md-switch right">
+							<label>
+								<input type="checkbox" id="navHorizontal"> 
+								<span>&nbsp;</span> 
+							</label>
+						</div>
+						
+						
+					</li>
+					<li class="clearfix mb10">
+						<div class="left small">Fixed Header</div>
+						<div class="md-switch right">
+							<label>
+								<input type="checkbox"  id="fixedHeader"> 
+								<span>&nbsp;</span> 
+							</label>
+						</div>
+					</li>
+					<li class="clearfix mb10">
+						<div class="left small">Nav Full</div>
+						<div class="md-switch right">
+							<label>
+								<input type="checkbox"  id="navFull"> 
+								<span>&nbsp;</span> 
+							</label>
+						</div>
+					</li>
+				</ul>
+				<hr/>
+				<ul class="themes list-unstyled" id="themeColor">
+					<li data-theme="theme-zero" class="active"></li>
+					<li data-theme="theme-one"></li>
+					<li data-theme="theme-two"></li>
+					<li data-theme="theme-three"></li>
+					<li data-theme="theme-four"></li>
+					<li data-theme="theme-five"></li>
+					<li data-theme="theme-six"></li>
+					<li data-theme="theme-seven"></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- #end theme settings -->
+
+
+	<script src="http://maps.googleapis.com/maps/api/js" type="text/javascript"></script>
+ <script type="text/javascript">
+    var myCenter=new google.maps.LatLng(-25.7468572,28.1836322);
+
+    function initialize()
+    {
+    var mapProp = {
+      center:myCenter,
+      zoom:13,
+      mapTypeId:google.maps.MapTypeId.SATELLITE
+      };
+
+    var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+    var marker=new google.maps.Marker({
+      position:myCenter,
+      url: "https://www.google.co.za/maps/place/iTechHub+(Pty)+Ltd/@-25.7500853,28.165215,13z/data=!3m1!4b1!4m2!3m1!1s0x1e956212a7a984d5:0xc201f31e2571a243",
+      });
+
+     
+    marker.setMap(map);
+
+    google.maps.event.addListener(marker, 'click', function() {
+        window.open(marker.url);
+    });
+
+    var infowindow = new google.maps.InfoWindow({
+      content:"Farm"
+      });
+   
+   
+    infowindow.open(map,marker);
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+
+	<!-- Dev only -->
+	<!-- Vendors -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+	<script src="{% static 'space/scripts/vendors.js' %}"></script>
+	<script src="{% static 'space/scripts/plugins/d3.min.js' %}"></script>
+	<script src="{% static 'space/scripts/plugins/c3.min.js' %}"></script>
+	<script src="{% static 'space/scripts/plugins/screenfull.js' %}"></script>
+	<script src="{% static 'space/scripts/plugins/perfect-scrollbar.min.js' %}"></script>
+	<script src="{% static 'space/scripts/plugins/waves.min.js' %}"></script>
+	<script src="{% static 'space/scripts/plugins/jquery.sparkline.min.js' %}"></script>
+	<script src="{% static 'space/scripts/plugins/jquery.easypiechart.min.js' %}"></script>
+	<script src="{% static 'space/scripts/plugins/bootstrap-rating.min.js' %}"></script>
+	<script src="{% static 'space/scripts/app.js' %}"></script>
+	<script src="{% static 'space/scripts/index.init.js' %}"></script>
+
+	
+	<script src="{% static 'space/scripts/jquery.simpleWeather.js' %}"></script>
+	<script src="{% static 'space/scripts/dashboard.js' %}"></script>
+
+</body>
+</html>
