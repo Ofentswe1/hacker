@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from django.contrib import admin
+
 admin.autodiscover()
-import space.views
+
 urlpatterns = [
-    url(r'^$', space.views.index, name='index'),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^$',include('space.urls')),
+    url(r'^space/',include('space.urls')),
+    url(r'^admin/', admin.site.urls),
 ]
